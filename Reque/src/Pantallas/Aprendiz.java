@@ -5,6 +5,8 @@
  */
 package Pantallas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin
@@ -16,8 +18,8 @@ public class Aprendiz extends javax.swing.JFrame {
      */
     public Aprendiz() {
         initComponents();
-        this.FondoRegistroAdmin.setVisible(false);
-        this.FondoRegistroMaestro.setVisible(false);
+        this.FondoVerPublicacion.setVisible(false);
+        this.FondoComent.setVisible(false);
     }
 
     /**
@@ -30,13 +32,18 @@ public class Aprendiz extends javax.swing.JFrame {
     private void initComponents() {
 
         LayeredPane = new javax.swing.JLayeredPane();
-        FondoRegistroAdmin = new javax.swing.JPanel();
-        RegistroAdmin = new javax.swing.JPanel();
-        TitleRegistroAdmin = new javax.swing.JLabel();
-        AdminName = new javax.swing.JTextField();
-        AdminEmail = new javax.swing.JTextField();
-        ConfirmarRegistroAdmin = new javax.swing.JButton();
-        CancelarRegistroAdmin = new javax.swing.JButton();
+        FondoVerPublicacion = new javax.swing.JPanel();
+        ComentarPublicacion = new javax.swing.JButton();
+        PublicacionVolver = new javax.swing.JButton();
+        jScrollPanePubli = new javax.swing.JScrollPane();
+        jTextAreaPubli = new javax.swing.JTextArea();
+        jScrollPaneComent = new javax.swing.JScrollPane();
+        jTextAreaComent = new javax.swing.JTextArea();
+        GuardarPublicacion = new javax.swing.JButton();
+        jScrollPaneComentar = new javax.swing.JScrollPane();
+        jTextAreaComentar = new javax.swing.JTextArea();
+        jScrollPaneTitulo = new javax.swing.JScrollPane();
+        jTextAreaTitulo = new javax.swing.JTextArea();
         FondoInicioAprendiz = new javax.swing.JPanel();
         InicioAprendiz = new javax.swing.JPanel();
         CuentaBtn = new javax.swing.JButton();
@@ -46,121 +53,117 @@ public class Aprendiz extends javax.swing.JFrame {
         MaestroNametf = new javax.swing.JTextField();
         BuscarMaestroBtn = new javax.swing.JButton();
         PaginaInicioBtn = new javax.swing.JButton();
-        FondoRegistroMaestro = new javax.swing.JPanel();
-        RegistroMaestro = new javax.swing.JPanel();
-        TitleRegistroMaestro = new javax.swing.JLabel();
-        MaestroName = new javax.swing.JTextField();
-        MaestroEmail = new javax.swing.JTextField();
-        MaestroFide = new javax.swing.JTextField();
-        ConfirmarRegistroMaestro = new javax.swing.JButton();
-        CancelarRegistroMaestro = new javax.swing.JButton();
+        jScrollPaneInicio = new javax.swing.JScrollPane();
+        FondoComent = new javax.swing.JPanel();
+        ConfirmarComent = new javax.swing.JButton();
+        CancelarComent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1288, 696));
         setSize(new java.awt.Dimension(1288, 696));
 
-        FondoRegistroAdmin.setBackground(new java.awt.Color(25, 37, 77));
-        FondoRegistroAdmin.setEnabled(false);
-        FondoRegistroAdmin.setFocusable(false);
+        FondoVerPublicacion.setBackground(new java.awt.Color(25, 37, 77));
+        FondoVerPublicacion.setEnabled(false);
+        FondoVerPublicacion.setFocusable(false);
 
-        RegistroAdmin.setBackground(new java.awt.Color(67, 72, 121));
-        RegistroAdmin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        TitleRegistroAdmin.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        TitleRegistroAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TitleRegistroAdmin.setText("Registro de Administrador");
-
-        AdminName.setBackground(new java.awt.Color(200, 191, 191));
-        AdminName.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        AdminName.setText(" Nombre");
-        AdminName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        AdminName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                AdminNameFocusLost(evt);
-            }
-        });
-        AdminName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AdminNameMouseClicked(evt);
-            }
-        });
-
-        AdminEmail.setBackground(new java.awt.Color(200, 191, 191));
-        AdminEmail.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        AdminEmail.setText(" Email");
-        AdminEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        AdminEmail.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                AdminEmailFocusLost(evt);
-            }
-        });
-        AdminEmail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AdminEmailMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout RegistroAdminLayout = new javax.swing.GroupLayout(RegistroAdmin);
-        RegistroAdmin.setLayout(RegistroAdminLayout);
-        RegistroAdminLayout.setHorizontalGroup(
-            RegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroAdminLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(RegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AdminName)
-                    .addComponent(TitleRegistroAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                    .addComponent(AdminEmail))
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-        RegistroAdminLayout.setVerticalGroup(
-            RegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroAdminLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(TitleRegistroAdmin)
-                .addGap(49, 49, 49)
-                .addComponent(AdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(AdminEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
-        );
-
-        ConfirmarRegistroAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        ConfirmarRegistroAdmin.setText("Confirmar");
-        ConfirmarRegistroAdmin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        CancelarRegistroAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        CancelarRegistroAdmin.setText("Cancelar");
-        CancelarRegistroAdmin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        CancelarRegistroAdmin.addActionListener(new java.awt.event.ActionListener() {
+        ComentarPublicacion.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ComentarPublicacion.setText("Comentar");
+        ComentarPublicacion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ComentarPublicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarRegistroAdminActionPerformed(evt);
+                ComentarPublicacionActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout FondoRegistroAdminLayout = new javax.swing.GroupLayout(FondoRegistroAdmin);
-        FondoRegistroAdmin.setLayout(FondoRegistroAdminLayout);
-        FondoRegistroAdminLayout.setHorizontalGroup(
-            FondoRegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoRegistroAdminLayout.createSequentialGroup()
-                .addGap(288, 288, 288)
-                .addGroup(FondoRegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(FondoRegistroAdminLayout.createSequentialGroup()
-                        .addComponent(ConfirmarRegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CancelarRegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(RegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(340, Short.MAX_VALUE))
+        PublicacionVolver.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        PublicacionVolver.setText("Volver");
+        PublicacionVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        PublicacionVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PublicacionVolverActionPerformed(evt);
+            }
+        });
+
+        jTextAreaPubli.setEditable(false);
+        jTextAreaPubli.setColumns(20);
+        jTextAreaPubli.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jTextAreaPubli.setRows(5);
+        jTextAreaPubli.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jTextAreaPubli.setFocusable(false);
+        jScrollPanePubli.setViewportView(jTextAreaPubli);
+
+        jTextAreaComent.setEditable(false);
+        jTextAreaComent.setColumns(10);
+        jTextAreaComent.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jTextAreaComent.setRows(5);
+        jTextAreaComent.setText("\n");
+        jTextAreaComent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jTextAreaComent.setFocusable(false);
+        jScrollPaneComent.setViewportView(jTextAreaComent);
+
+        GuardarPublicacion.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        GuardarPublicacion.setText("Guardar");
+        GuardarPublicacion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        GuardarPublicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarPublicacionActionPerformed(evt);
+            }
+        });
+
+        jTextAreaComentar.setColumns(10);
+        jTextAreaComentar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jTextAreaComentar.setRows(2);
+        jTextAreaComentar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jScrollPaneComentar.setViewportView(jTextAreaComentar);
+
+        jScrollPaneTitulo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        jTextAreaTitulo.setEditable(false);
+        jTextAreaTitulo.setColumns(20);
+        jTextAreaTitulo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jTextAreaTitulo.setRows(1);
+        jTextAreaTitulo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jScrollPaneTitulo.setViewportView(jTextAreaTitulo);
+
+        javax.swing.GroupLayout FondoVerPublicacionLayout = new javax.swing.GroupLayout(FondoVerPublicacion);
+        FondoVerPublicacion.setLayout(FondoVerPublicacionLayout);
+        FondoVerPublicacionLayout.setHorizontalGroup(
+            FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoVerPublicacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPaneComent, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneComentar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoVerPublicacionLayout.createSequentialGroup()
+                        .addComponent(ComentarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191)
+                        .addComponent(GuardarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198)
+                        .addComponent(PublicacionVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPanePubli, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPaneTitulo))
+                .addContainerGap())
         );
-        FondoRegistroAdminLayout.setVerticalGroup(
-            FondoRegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoRegistroAdminLayout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
-                .addComponent(RegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(FondoRegistroAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ConfirmarRegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CancelarRegistroAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63))
+        FondoVerPublicacionLayout.setVerticalGroup(
+            FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoVerPublicacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneComent)
+                    .addGroup(FondoVerPublicacionLayout.createSequentialGroup()
+                        .addComponent(jScrollPaneTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPanePubli, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(PublicacionVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComentarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GuardarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneComentar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         FondoInicioAprendiz.setBackground(new java.awt.Color(25, 37, 77));
@@ -253,6 +256,9 @@ public class Aprendiz extends javax.swing.JFrame {
         PaginaInicioBtn.setText("Inicio");
         PaginaInicioBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        jScrollPaneInicio.setBackground(new java.awt.Color(25, 37, 77));
+        jScrollPaneInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
         javax.swing.GroupLayout FondoInicioAprendizLayout = new javax.swing.GroupLayout(FondoInicioAprendiz);
         FondoInicioAprendiz.setLayout(FondoInicioAprendizLayout);
         FondoInicioAprendizLayout.setHorizontalGroup(
@@ -260,13 +266,19 @@ public class Aprendiz extends javax.swing.JFrame {
             .addGroup(FondoInicioAprendizLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(InicioAprendiz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194)
-                .addComponent(PaginaInicioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194))
+                .addGroup(FondoInicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoInicioAprendizLayout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(PaginaInicioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194))
+                    .addGroup(FondoInicioAprendizLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPaneInicio)
+                        .addContainerGap())))
         );
         FondoInicioAprendizLayout.setVerticalGroup(
             FondoInicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,156 +286,80 @@ public class Aprendiz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(FondoInicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(InicioAprendiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(FondoInicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                        .addComponent(PaginaInicioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(FondoInicioAprendizLayout.createSequentialGroup()
+                        .addGroup(FondoInicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                            .addComponent(PaginaInicioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        FondoRegistroMaestro.setBackground(new java.awt.Color(25, 37, 77));
-        FondoRegistroMaestro.setEnabled(false);
-        FondoRegistroMaestro.setFocusable(false);
+        FondoComent.setBackground(new java.awt.Color(25, 37, 77));
+        FondoComent.setEnabled(false);
+        FondoComent.setFocusable(false);
 
-        RegistroMaestro.setBackground(new java.awt.Color(67, 72, 121));
-        RegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        TitleRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        TitleRegistroMaestro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TitleRegistroMaestro.setText("Registro de Maestro");
-
-        MaestroName.setBackground(new java.awt.Color(200, 191, 191));
-        MaestroName.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        MaestroName.setText(" Nombre");
-        MaestroName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        MaestroName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                MaestroNameFocusLost(evt);
-            }
-        });
-        MaestroName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MaestroNameMouseClicked(evt);
-            }
-        });
-
-        MaestroEmail.setBackground(new java.awt.Color(200, 191, 191));
-        MaestroEmail.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        MaestroEmail.setText(" Email");
-        MaestroEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        MaestroEmail.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                MaestroEmailFocusLost(evt);
-            }
-        });
-        MaestroEmail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MaestroEmailMouseClicked(evt);
-            }
-        });
-
-        MaestroFide.setBackground(new java.awt.Color(200, 191, 191));
-        MaestroFide.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        MaestroFide.setText(" Id FIDE");
-        MaestroFide.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        MaestroFide.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                MaestroFideFocusLost(evt);
-            }
-        });
-        MaestroFide.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MaestroFideMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout RegistroMaestroLayout = new javax.swing.GroupLayout(RegistroMaestro);
-        RegistroMaestro.setLayout(RegistroMaestroLayout);
-        RegistroMaestroLayout.setHorizontalGroup(
-            RegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroMaestroLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(RegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MaestroName)
-                    .addComponent(TitleRegistroMaestro, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                    .addComponent(MaestroEmail)
-                    .addComponent(MaestroFide))
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-        RegistroMaestroLayout.setVerticalGroup(
-            RegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroMaestroLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(TitleRegistroMaestro)
-                .addGap(38, 38, 38)
-                .addComponent(MaestroName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(MaestroEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(MaestroFide, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
-        ConfirmarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        ConfirmarRegistroMaestro.setText("Confirmar");
-        ConfirmarRegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        CancelarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        CancelarRegistroMaestro.setText("Cancelar");
-        CancelarRegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        CancelarRegistroMaestro.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmarComent.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ConfirmarComent.setText("Comentar");
+        ConfirmarComent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ConfirmarComent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarRegistroMaestroActionPerformed(evt);
+                ConfirmarComentActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout FondoRegistroMaestroLayout = new javax.swing.GroupLayout(FondoRegistroMaestro);
-        FondoRegistroMaestro.setLayout(FondoRegistroMaestroLayout);
-        FondoRegistroMaestroLayout.setHorizontalGroup(
-            FondoRegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoRegistroMaestroLayout.createSequentialGroup()
+        CancelarComent.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        CancelarComent.setText("Cancelar");
+        CancelarComent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CancelarComent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarComentActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout FondoComentLayout = new javax.swing.GroupLayout(FondoComent);
+        FondoComent.setLayout(FondoComentLayout);
+        FondoComentLayout.setHorizontalGroup(
+            FondoComentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoComentLayout.createSequentialGroup()
                 .addGap(288, 288, 288)
-                .addGroup(FondoRegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(FondoRegistroMaestroLayout.createSequentialGroup()
-                        .addComponent(ConfirmarRegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CancelarRegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(RegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ConfirmarComent, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(286, 286, 286)
+                .addComponent(CancelarComent, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(340, Short.MAX_VALUE))
         );
-        FondoRegistroMaestroLayout.setVerticalGroup(
-            FondoRegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoRegistroMaestroLayout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
-                .addComponent(RegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(FondoRegistroMaestroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ConfirmarRegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CancelarRegistroMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        FondoComentLayout.setVerticalGroup(
+            FondoComentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoComentLayout.createSequentialGroup()
+                .addContainerGap(639, Short.MAX_VALUE)
+                .addGroup(FondoComentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmarComent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CancelarComent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63))
         );
 
-        LayeredPane.setLayer(FondoRegistroAdmin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPane.setLayer(FondoVerPublicacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
         LayeredPane.setLayer(FondoInicioAprendiz, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        LayeredPane.setLayer(FondoRegistroMaestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPane.setLayer(FondoComent, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout LayeredPaneLayout = new javax.swing.GroupLayout(LayeredPane);
         LayeredPane.setLayout(LayeredPaneLayout);
         LayeredPaneLayout.setHorizontalGroup(
             LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FondoRegistroAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(FondoVerPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(FondoInicioAprendiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(FondoRegistroMaestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(FondoComent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LayeredPaneLayout.setVerticalGroup(
             LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FondoRegistroAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(FondoVerPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(FondoInicioAprendiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(FondoRegistroMaestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(FondoComent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -440,31 +376,6 @@ public class Aprendiz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AdminNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AdminNameFocusLost
-        if(this.AdminName.getText().equals("")){
-            this.AdminName.setText(" Nombre");
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AdminNameFocusLost
-
-    private void AdminNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminNameMouseClicked
-        if(this.AdminName.getText().equals(" Nombre")){
-            this.AdminName.setText("");
-        }      // TODO add your handling code here:
-    }//GEN-LAST:event_AdminNameMouseClicked
-
-    private void AdminEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AdminEmailFocusLost
-        if(this.AdminEmail.getText().equals("")){
-            this.AdminEmail.setText(" Email");
-        }
-    }//GEN-LAST:event_AdminEmailFocusLost
-
-    private void AdminEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminEmailMouseClicked
-        if(this.AdminEmail.getText().equals(" Email")){
-            this.AdminEmail.setText("");
-        }
-    }//GEN-LAST:event_AdminEmailMouseClicked
-
     private void MaestroNametfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MaestroNametfFocusLost
         if(this.MaestroNametf.getText().equals("")){
             this.MaestroNametf.setText(" Buscar Maestro");
@@ -478,76 +389,57 @@ public class Aprendiz extends javax.swing.JFrame {
     }//GEN-LAST:event_MaestroNametfMouseClicked
 
     private void GuardadasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardadasBtnActionPerformed
-//        this.FondoInicioAprendiz.setEnabled(false);
-//        this.FondoInicioAprendiz.setFocusable(false);
-//        this.FondoInicioAprendiz.setVisible(false);
-//        this.FondoRegistroMaestro.setEnabled(true);
-//        this.FondoRegistroMaestro.setFocusable(true);
-//        this.FondoRegistroMaestro.setVisible(true);
+        this.FondoInicioAprendiz.setEnabled(false);
+        this.FondoInicioAprendiz.setFocusable(false);
+        this.FondoInicioAprendiz.setVisible(false);
+        this.FondoVerPublicacion.setEnabled(true);
+        this.FondoVerPublicacion.setFocusable(true);
+        this.FondoVerPublicacion.setVisible(true);
     }//GEN-LAST:event_GuardadasBtnActionPerformed
 
     private void SeguirMaestroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirMaestroBtnActionPerformed
-//        this.FondoInicioAprendiz.setEnabled(false);
-//        this.FondoInicioAprendiz.setFocusable(false);
-//        this.FondoInicioAprendiz.setVisible(false);
-//        this.FondoRegistroAdmin.setEnabled(true);
-//        this.FondoRegistroAdmin.setFocusable(true);
-//        this.FondoRegistroAdmin.setVisible(true);
+        String seguir = JOptionPane.showInputDialog("A que profesor desea seguir?");
     }//GEN-LAST:event_SeguirMaestroBtnActionPerformed
 
-    private void CancelarRegistroAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarRegistroAdminActionPerformed
-//        this.FondoInicioAprendiz.setEnabled(true);
-//        this.FondoInicioAprendiz.setFocusable(true);
-//        this.FondoInicioAprendiz.setVisible(true);
-//        this.FondoRegistroAdmin.setEnabled(false);
-//        this.FondoRegistroAdmin.setFocusable(false);
-//        this.FondoRegistroAdmin.setVisible(false);
-    }//GEN-LAST:event_CancelarRegistroAdminActionPerformed
+    private void PublicacionVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicacionVolverActionPerformed
+        this.FondoInicioAprendiz.setEnabled(true);
+        this.FondoInicioAprendiz.setFocusable(true);
+        this.FondoInicioAprendiz.setVisible(true);
+        this.FondoVerPublicacion.setEnabled(false);
+        this.FondoVerPublicacion.setFocusable(false);
+        this.FondoVerPublicacion.setVisible(false);
+    }//GEN-LAST:event_PublicacionVolverActionPerformed
 
-    private void MaestroNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MaestroNameFocusLost
-        if(this.MaestroName.getText().equals("")){
-            this.MaestroName.setText(" Nombre");
+    private void CancelarComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarComentActionPerformed
+        this.FondoVerPublicacion.setEnabled(true);
+        this.FondoVerPublicacion.setFocusable(true);
+        this.FondoVerPublicacion.setVisible(true);
+        this.FondoComent.setEnabled(false);
+        this.FondoComent.setFocusable(false);
+        this.FondoComent.setVisible(false);
+        this.jTextAreaComentar.setText("");
+    }//GEN-LAST:event_CancelarComentActionPerformed
+
+    private void ComentarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComentarPublicacionActionPerformed
+        if(!this.jTextAreaComentar.getText().equals("")){
+           String Comment = this.jTextAreaComent.getText().concat("User: "+this.jTextAreaComentar.getText()+"\n");
+            this.jTextAreaComent.setText(Comment);
+            this.jTextAreaComentar.setText(""); 
         }
-    }//GEN-LAST:event_MaestroNameFocusLost
+    }//GEN-LAST:event_ComentarPublicacionActionPerformed
 
-    private void MaestroNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaestroNameMouseClicked
-        if(this.MaestroName.getText().equals(" Nombre")){
-            this.MaestroName.setText("");
-        }  
-    }//GEN-LAST:event_MaestroNameMouseClicked
+    private void ConfirmarComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarComentActionPerformed
+        this.FondoVerPublicacion.setEnabled(true);
+        this.FondoVerPublicacion.setFocusable(true);
+        this.FondoVerPublicacion.setVisible(true);
+        this.FondoComent.setEnabled(false);
+        this.FondoComent.setFocusable(false);
+        this.FondoComent.setVisible(false);
+    }//GEN-LAST:event_ConfirmarComentActionPerformed
 
-    private void MaestroEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MaestroEmailFocusLost
-        if(this.MaestroEmail.getText().equals("")){
-            this.MaestroEmail.setText(" Email");
-        }
-    }//GEN-LAST:event_MaestroEmailFocusLost
-
-    private void MaestroEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaestroEmailMouseClicked
-        if(this.MaestroEmail.getText().equals(" Email")){
-            this.MaestroEmail.setText("");
-        }
-    }//GEN-LAST:event_MaestroEmailMouseClicked
-
-    private void CancelarRegistroMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarRegistroMaestroActionPerformed
-//        this.FondoInicioAprendiz.setEnabled(true);
-//        this.FondoInicioAprendiz.setFocusable(true);
-//        this.FondoInicioAprendiz.setVisible(true);
-//        this.FondoRegistroMaestro.setEnabled(false);
-//        this.FondoRegistroMaestro.setFocusable(false);
-//        this.FondoRegistroMaestro.setVisible(false);
-    }//GEN-LAST:event_CancelarRegistroMaestroActionPerformed
-
-    private void MaestroFideFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MaestroFideFocusLost
-        if(this.MaestroFide.getText().equals("")){
-            this.MaestroFide.setText(" Id FIDE");
-        }
-    }//GEN-LAST:event_MaestroFideFocusLost
-
-    private void MaestroFideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaestroFideMouseClicked
-        if(this.MaestroFide.getText().equals(" Id FIDE")){
-            this.MaestroFide.setText("");
-        }
-    }//GEN-LAST:event_MaestroFideMouseClicked
+    private void GuardarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarPublicacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarPublicacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -592,30 +484,31 @@ public class Aprendiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AdminEmail;
-    private javax.swing.JTextField AdminName;
     private javax.swing.JButton BuscarMaestroBtn;
-    private javax.swing.JButton CancelarRegistroAdmin;
-    private javax.swing.JButton CancelarRegistroMaestro;
+    private javax.swing.JButton CancelarComent;
     private javax.swing.JButton CarrarSesionBtn;
-    private javax.swing.JButton ConfirmarRegistroAdmin;
-    private javax.swing.JButton ConfirmarRegistroMaestro;
+    private javax.swing.JButton ComentarPublicacion;
+    private javax.swing.JButton ConfirmarComent;
     private javax.swing.JButton CuentaBtn;
+    private javax.swing.JPanel FondoComent;
     private javax.swing.JPanel FondoInicioAprendiz;
-    private javax.swing.JPanel FondoRegistroAdmin;
-    private javax.swing.JPanel FondoRegistroMaestro;
+    private javax.swing.JPanel FondoVerPublicacion;
     private javax.swing.JButton GuardadasBtn;
+    private javax.swing.JButton GuardarPublicacion;
     private javax.swing.JPanel InicioAprendiz;
     private javax.swing.JLayeredPane LayeredPane;
-    private javax.swing.JTextField MaestroEmail;
-    private javax.swing.JTextField MaestroFide;
-    private javax.swing.JTextField MaestroName;
     private javax.swing.JTextField MaestroNametf;
     private javax.swing.JButton PaginaInicioBtn;
-    private javax.swing.JPanel RegistroAdmin;
-    private javax.swing.JPanel RegistroMaestro;
+    private javax.swing.JButton PublicacionVolver;
     private javax.swing.JButton SeguirMaestroBtn;
-    private javax.swing.JLabel TitleRegistroAdmin;
-    private javax.swing.JLabel TitleRegistroMaestro;
+    private javax.swing.JScrollPane jScrollPaneComent;
+    private javax.swing.JScrollPane jScrollPaneComentar;
+    private javax.swing.JScrollPane jScrollPaneInicio;
+    private javax.swing.JScrollPane jScrollPanePubli;
+    private javax.swing.JScrollPane jScrollPaneTitulo;
+    private javax.swing.JTextArea jTextAreaComent;
+    private javax.swing.JTextArea jTextAreaComentar;
+    private javax.swing.JTextArea jTextAreaPubli;
+    private javax.swing.JTextArea jTextAreaTitulo;
     // End of variables declaration//GEN-END:variables
 }

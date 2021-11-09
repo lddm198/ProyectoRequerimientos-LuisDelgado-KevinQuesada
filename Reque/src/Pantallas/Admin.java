@@ -45,6 +45,7 @@ public class Admin extends javax.swing.JFrame {
         EliminarCuentaBtn = new javax.swing.JButton();
         MaestroNametf = new javax.swing.JTextField();
         BuscarMaestroBtn = new javax.swing.JButton();
+        jScrollPaneInicio = new javax.swing.JScrollPane();
         FondoRegistroMaestro = new javax.swing.JPanel();
         RegistroMaestro = new javax.swing.JPanel();
         TitleRegistroMaestro = new javax.swing.JLabel();
@@ -247,6 +248,9 @@ public class Admin extends javax.swing.JFrame {
         BuscarMaestroBtn.setText("Go");
         BuscarMaestroBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        jScrollPaneInicio.setBackground(new java.awt.Color(25, 37, 77));
+        jScrollPaneInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
         javax.swing.GroupLayout FondoInicioAdminLayout = new javax.swing.GroupLayout(FondoInicioAdmin);
         FondoInicioAdmin.setLayout(FondoInicioAdminLayout);
         FondoInicioAdminLayout.setHorizontalGroup(
@@ -254,23 +258,30 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(FondoInicioAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(InicioAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(223, 223, 223)
-                .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(228, 228, 228))
+                .addGroup(FondoInicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoInicioAdminLayout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(228, 228, 228))
+                    .addGroup(FondoInicioAdminLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPaneInicio)
+                        .addContainerGap())))
         );
         FondoInicioAdminLayout.setVerticalGroup(
             FondoInicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoInicioAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(FondoInicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InicioAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(FondoInicioAdminLayout.createSequentialGroup()
                         .addGroup(FondoInicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(InicioAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -603,5 +614,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel RegistroMaestro;
     private javax.swing.JLabel TitleRegistroAdmin;
     private javax.swing.JLabel TitleRegistroMaestro;
+    private javax.swing.JScrollPane jScrollPaneInicio;
     // End of variables declaration//GEN-END:variables
 }
