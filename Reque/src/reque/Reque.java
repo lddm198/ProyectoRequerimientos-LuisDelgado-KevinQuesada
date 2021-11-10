@@ -8,6 +8,9 @@ import ConexionDB.*;
 import Pantallas.Inicio;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 /**
  *
  * @author kevin
@@ -21,6 +24,9 @@ public class Reque {
      */
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
        
+//        Mailer mail = new Mailer();
+//        try {
+//            mail.send("kevin2002.qj@gmail.com","1234");
         Connection con = Conexion.connect();
         Controller control = new Controller(con);
         try{
@@ -30,6 +36,9 @@ public class Reque {
         catch(Exception e){
             
         }
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(Reque.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
 }

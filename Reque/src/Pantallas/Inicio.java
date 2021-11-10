@@ -404,24 +404,24 @@ public class Inicio extends javax.swing.JFrame {
 
     private void ConfirmarbtnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarbtnCActionPerformed
         boolean ValidPass = this.controlador.ValidatePassword(this.ContraseñatxfC.getText());
-        boolean ValidEmail = this.controlador.ValidateEmail(this.EmailtxfC.getText());
+        boolean ValidEmail = this.controlador.ValidateEmail(this.EmailtxfC.getText().toLowerCase());
         if(ValidEmail){
             if(ValidPass){
                 try {
-                    if(this.controlador.InsertUser(this.NametxfC.getText(), 3, this.ContraseñatxfC.getText(), this.EmailtxfC.getText())){
-                        JOptionPane.showMessageDialog(this.Fondo,"Usuario creado de forma correcta");
+                    if(this.controlador.InsertUser(this.NametxfC.getText(), 3, this.ContraseñatxfC.getText(), this.EmailtxfC.getText().toLowerCase())){
+                        JOptionPane.showMessageDialog(this.FondoCrear,"Usuario creado de forma correcta");
                     }
                 } catch (SQLException ex) {
     //                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this.Fondo,"Este usuario ya existe");
+                    JOptionPane.showMessageDialog(this.FondoCrear,"Este usuario ya existe");
                 }
             }
             else{
-                JOptionPane.showMessageDialog(this.Fondo,"Contraseña invalida");
+                JOptionPane.showMessageDialog(this.FondoCrear,"Contraseña invalida");
             }
         }
         else{
-            JOptionPane.showMessageDialog(this.Fondo,"Email invalido");
+            JOptionPane.showMessageDialog(this.FondoCrear,"Email invalido");
         }
     }//GEN-LAST:event_ConfirmarbtnCActionPerformed
 

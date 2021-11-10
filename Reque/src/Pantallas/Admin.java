@@ -6,6 +6,12 @@
 package Pantallas;
 
 import ConexionDB.Controller;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.swing.JOptionPane;
+import reque.Mailer;
 import reque.User;
 
 /**
@@ -19,12 +25,14 @@ public class Admin extends javax.swing.JFrame {
      */
     User usuario;
     Controller control;
+    Mailer mails;
     public Admin(User usuario, Controller control) {
         initComponents();
         this.FondoRegistroAdmin.setVisible(false);
         this.FondoRegistroMaestro.setVisible(false);
         this.usuario = usuario;
         this.control = control;
+        this.mails = new Mailer();
     }
 
     /**
@@ -134,6 +142,11 @@ public class Admin extends javax.swing.JFrame {
         ConfirmarRegistroAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         ConfirmarRegistroAdmin.setText("Confirmar");
         ConfirmarRegistroAdmin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ConfirmarRegistroAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarRegistroAdminActionPerformed(evt);
+            }
+        });
 
         CancelarRegistroAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CancelarRegistroAdmin.setText("Cancelar");
@@ -559,6 +572,29 @@ public class Admin extends javax.swing.JFrame {
             this.MaestroFide.setText("");
         }
     }//GEN-LAST:event_MaestroFideMouseClicked
+
+    private void ConfirmarRegistroAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarRegistroAdminActionPerformed
+        boolean ValidEmail = this.control.ValidateEmail(this.AdminEmail.getText().toLowerCase());
+        if(ValidEmail){
+            try {
+                if(this.control.InsertUser(this.AdminName.getText(), 1, "12345", this.AdminEmail.getText().toLowerCase())){
+                    JOptionPane.showMessageDialog(this.FondoRegistroAdmin,"Usuario creado de forma correcta");
+                    try {
+                        this.mails.send(this.AdminEmail.getText().toLowerCase(), "12345");
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            } catch (SQLException ex) {
+//                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this.FondoRegistroAdmin,"Este usuario ya existe");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this.FondoRegistroAdmin,"Email invalido");
+        }
+    }//GEN-LAST:event_ConfirmarRegistroAdminActionPerformed
 
     /**
      * @param args the command line arguments
