@@ -5,6 +5,13 @@
  */
 package Pantallas;
 
+import ConexionDB.Controller;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import reque.User;
+
 /**
  *
  * @author kevin
@@ -14,9 +21,11 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    Controller controlador;
+    public Inicio(Controller controlador) {
         initComponents();
         this.FondoCrear.setVisible(false);
+        this.controlador = controlador;
     }
 
     /**
@@ -46,6 +55,7 @@ public class Inicio extends javax.swing.JFrame {
         CrearCuentaBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1308, 730));
         setSize(new java.awt.Dimension(1308, 730));
 
         LayeredPane.setMaximumSize(new java.awt.Dimension(1288, 696));
@@ -393,11 +403,67 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearCuentaBtnActionPerformed
 
     private void ConfirmarbtnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarbtnCActionPerformed
-        System.out.println("hola");        // TODO add your handling code here:
+        boolean ValidPass = this.controlador.ValidatePassword(this.ContraseñatxfC.getText());
+        boolean ValidEmail = this.controlador.ValidateEmail(this.EmailtxfC.getText());
+        if(ValidEmail){
+            if(ValidPass){
+                try {
+                    if(this.controlador.InsertUser(this.NametxfC.getText(), 3, this.ContraseñatxfC.getText(), this.EmailtxfC.getText())){
+                        JOptionPane.showMessageDialog(this.Fondo,"Usuario creado de forma correcta");
+                    }
+                } catch (SQLException ex) {
+    //                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this.Fondo,"Este usuario ya existe");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this.Fondo,"Contraseña invalida");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this.Fondo,"Email invalido");
+        }
     }//GEN-LAST:event_ConfirmarbtnCActionPerformed
 
     private void ConfirmarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarbtnActionPerformed
-        System.out.println("hola...");        // TODO add your handling code here:
+        
+        try {
+            User user = controlador.SelectUser(this.Nametxf.getText(),this.Contraseñatxf.getText()); 
+            if(user == null){
+                JOptionPane.showMessageDialog(this.Fondo,"Este nombre y contraseña no corresponden a un usuario");
+            }
+            else{
+                switch (user.getTipo()) {
+                    case 1:
+                        {
+                            Admin pantalla = new Admin(user,this.controlador);
+                            pantalla.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                        }
+                    case 2:
+                        {
+                            Maestro pantalla = new Maestro(user,this.controlador);
+                            pantalla.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                        }
+                    case 3:
+                        {
+                            Aprendiz pantalla = new Aprendiz(user,this.controlador);
+                            pantalla.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                        }
+                    default:
+                        JOptionPane.showMessageDialog(this.Fondo,"Este nombre y contraseña no corresponden a un usuario valido");
+                        break;
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ConfirmarbtnActionPerformed
 
     private void VolverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverBtnActionPerformed
@@ -412,37 +478,6 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inicio().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Confirmarbtn;

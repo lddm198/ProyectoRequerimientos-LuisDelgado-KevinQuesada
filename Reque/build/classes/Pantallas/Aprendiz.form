@@ -300,7 +300,7 @@
                               <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="PaginaInicioBtn" min="-2" pref="56" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="MaestroNametf" pref="542" max="32767" attributes="0"/>
+                              <Component id="MaestroNametf" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="BuscarMaestroBtn" min="-2" pref="56" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
@@ -453,6 +453,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CarrarSesionBtnActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -521,6 +524,22 @@
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanelInicio">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="4d" green="25" red="19" type="rgb"/>
+                    </Property>
+                    <Property name="autoscrolls" type="boolean" value="true"/>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="0"/>
+                    <Property name="rows" type="int" value="100"/>
+                    <Property name="verticalGap" type="int" value="25"/>
+                  </Layout>
+                </Container>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>

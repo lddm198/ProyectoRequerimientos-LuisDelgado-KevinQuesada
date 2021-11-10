@@ -5,8 +5,8 @@
  */
 package Pantallas;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import ConexionDB.Controller;
+import reque.User;
 
 /**
  *
@@ -17,13 +17,16 @@ public class Admin extends javax.swing.JFrame {
     /**
      * Creates new form Start
      */
-    public Admin() {
+    User usuario;
+    Controller control;
+    public Admin(User usuario, Controller control) {
         initComponents();
         this.FondoRegistroAdmin.setVisible(false);
         this.FondoRegistroMaestro.setVisible(false);
+        this.usuario = usuario;
+        this.control = control;
     }
- 
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,11 +378,6 @@ public class Admin extends javax.swing.JFrame {
         ConfirmarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         ConfirmarRegistroMaestro.setText("Confirmar");
         ConfirmarRegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        ConfirmarRegistroMaestro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmarRegistroMaestroActionPerformed(evt);
-            }
-        });
 
         CancelarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CancelarRegistroMaestro.setText("Cancelar");
@@ -562,52 +560,9 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MaestroFideMouseClicked
 
-    private void ConfirmarRegistroMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarRegistroMaestroActionPerformed
-        
-        // TODO add your handling code here:
-      
-        //InsertarMaestro();
-        JavaMail.enviarMail("luisdidelgado7@gmail.com");
-       
-        
-    }//GEN-LAST:event_ConfirmarRegistroMaestroActionPerformed
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Admin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AdminEmail;

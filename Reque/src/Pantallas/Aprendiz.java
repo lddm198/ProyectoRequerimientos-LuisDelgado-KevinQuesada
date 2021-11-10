@@ -5,7 +5,12 @@
  */
 package Pantallas;
 
+import ConexionDB.Controller;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import reque.Publicacion;
+import reque.User;
 
 /**
  *
@@ -16,10 +21,15 @@ public class Aprendiz extends javax.swing.JFrame {
     /**
      * Creates new form Start
      */
-    public Aprendiz() {
+    User usuario;
+    Controller control;
+    public Aprendiz(User usuario, Controller control) {
         initComponents();
         this.FondoVerPublicacion.setVisible(false);
         this.FondoComent.setVisible(false);
+        this.usuario = usuario;
+        this.control = control;
+        
     }
 
     /**
@@ -54,6 +64,7 @@ public class Aprendiz extends javax.swing.JFrame {
         BuscarMaestroBtn = new javax.swing.JButton();
         PaginaInicioBtn = new javax.swing.JButton();
         jScrollPaneInicio = new javax.swing.JScrollPane();
+        jPanelInicio = new javax.swing.JPanel();
         FondoComent = new javax.swing.JPanel();
         ConfirmarComent = new javax.swing.JButton();
         CancelarComent = new javax.swing.JButton();
@@ -200,6 +211,11 @@ public class Aprendiz extends javax.swing.JFrame {
         CarrarSesionBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CarrarSesionBtn.setText("Cerrar Sesión");
         CarrarSesionBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CarrarSesionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CarrarSesionBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InicioAprendizLayout = new javax.swing.GroupLayout(InicioAprendiz);
         InicioAprendiz.setLayout(InicioAprendizLayout);
@@ -259,6 +275,11 @@ public class Aprendiz extends javax.swing.JFrame {
         jScrollPaneInicio.setBackground(new java.awt.Color(25, 37, 77));
         jScrollPaneInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        jPanelInicio.setBackground(new java.awt.Color(25, 37, 77));
+        jPanelInicio.setAutoscrolls(true);
+        jPanelInicio.setLayout(new java.awt.GridLayout(100, 0, 0, 25));
+        jScrollPaneInicio.setViewportView(jPanelInicio);
+
         javax.swing.GroupLayout FondoInicioAprendizLayout = new javax.swing.GroupLayout(FondoInicioAprendiz);
         FondoInicioAprendiz.setLayout(FondoInicioAprendizLayout);
         FondoInicioAprendizLayout.setHorizontalGroup(
@@ -271,7 +292,7 @@ public class Aprendiz extends javax.swing.JFrame {
                         .addGap(194, 194, 194)
                         .addComponent(PaginaInicioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MaestroNametf, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                        .addComponent(MaestroNametf)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(194, 194, 194))
@@ -398,7 +419,7 @@ public class Aprendiz extends javax.swing.JFrame {
     }//GEN-LAST:event_GuardadasBtnActionPerformed
 
     private void SeguirMaestroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirMaestroBtnActionPerformed
-        String seguir = JOptionPane.showInputDialog("A que profesor desea seguir?");
+        String seguir = JOptionPane.showInputDialog("¿A qué maestro desea seguir?");
     }//GEN-LAST:event_SeguirMaestroBtnActionPerformed
 
     private void PublicacionVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicacionVolverActionPerformed
@@ -441,47 +462,47 @@ public class Aprendiz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_GuardarPublicacionActionPerformed
 
+    private void CarrarSesionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarrarSesionBtnActionPerformed
+        String a = "Magnus";
+        Publicacion b;
+        b = new Publicacion("Titulo Prueba","Magnus","Holaaaa, Como andan?");
+        b.setText("<html><p></p><p>Autor: "+b.getAutor()+"</p><p>"+b.getTitulo()+"</p><p></p><p></p></html>");
+        b.setFont(new java.awt.Font("Century Gothic", 1, 18));
+        b.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        b.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+                FondoInicioAprendiz.setEnabled(false);
+                FondoInicioAprendiz.setFocusable(false);
+                FondoInicioAprendiz.setVisible(false);
+                FondoVerPublicacion.setEnabled(true);
+                FondoVerPublicacion.setFocusable(true);
+                FondoVerPublicacion.setVisible(true);
+                jTextAreaPubli.setText(b.getTexto());
+                jTextAreaTitulo.setText(b.getTitulo());
+                
+            }
+        });
+//        JTextArea jTextAreaNuevaPubli;
+//        jTextAreaNuevaPubli = new javax.swing.JTextArea();
+//        jTextAreaNuevaPubli.setEditable(false);
+//        jTextAreaNuevaPubli.setColumns(10);
+//        jTextAreaNuevaPubli.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+//        jTextAreaNuevaPubli.setRows(5);
+//        jTextAreaNuevaPubli.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+//        jTextAreaNuevaPubli.setFocusable(false);
+//        jTextAreaNuevaPubli.setText("aaaa");
+        a(this.jPanelInicio,b);
+    }//GEN-LAST:event_CarrarSesionBtnActionPerformed
+
+    private void a(JPanel p, JButton b){
+        p.add(b);
+        p.revalidate();
+        p.repaint();
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Aprendiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Aprendiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Aprendiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Aprendiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Aprendiz().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarMaestroBtn;
@@ -501,6 +522,7 @@ public class Aprendiz extends javax.swing.JFrame {
     private javax.swing.JButton PaginaInicioBtn;
     private javax.swing.JButton PublicacionVolver;
     private javax.swing.JButton SeguirMaestroBtn;
+    private javax.swing.JPanel jPanelInicio;
     private javax.swing.JScrollPane jScrollPaneComent;
     private javax.swing.JScrollPane jScrollPaneComentar;
     private javax.swing.JScrollPane jScrollPaneInicio;
