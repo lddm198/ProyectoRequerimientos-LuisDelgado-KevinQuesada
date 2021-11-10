@@ -46,7 +46,6 @@ public class Inicio extends javax.swing.JFrame {
         CrearCuentaBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1308, 730));
         setSize(new java.awt.Dimension(1308, 730));
 
         LayeredPane.setMaximumSize(new java.awt.Dimension(1288, 696));

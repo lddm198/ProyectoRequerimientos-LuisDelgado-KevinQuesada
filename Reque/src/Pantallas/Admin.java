@@ -5,6 +5,9 @@
  */
 package Pantallas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author kevin
@@ -19,7 +22,8 @@ public class Admin extends javax.swing.JFrame {
         this.FondoRegistroAdmin.setVisible(false);
         this.FondoRegistroMaestro.setVisible(false);
     }
-
+ 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -371,6 +375,11 @@ public class Admin extends javax.swing.JFrame {
         ConfirmarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         ConfirmarRegistroMaestro.setText("Confirmar");
         ConfirmarRegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ConfirmarRegistroMaestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarRegistroMaestroActionPerformed(evt);
+            }
+        });
 
         CancelarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CancelarRegistroMaestro.setText("Cancelar");
@@ -553,6 +562,16 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MaestroFideMouseClicked
 
+    private void ConfirmarRegistroMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarRegistroMaestroActionPerformed
+        
+        // TODO add your handling code here:
+      
+        //InsertarMaestro();
+        JavaMail.enviarMail("luisdidelgado7@gmail.com");
+       
+        
+    }//GEN-LAST:event_ConfirmarRegistroMaestroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -580,6 +599,7 @@ public class Admin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
