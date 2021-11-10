@@ -44,6 +44,7 @@ public class JavaMail {
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
             message.setSubject("Bienvenido a EasyChess");
             message.setText("Hola " + destinatario + "! \n Bienvenido a EasyChess :)");  
+            
             Transport transporte = session.getTransport("smtp");
             transporte.connect(myAccountEmail, password);
             transporte.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
