@@ -9,11 +9,11 @@ package reque;
  *
  * @author kevin
  */
-class Comment {
+public class Comentario {
     String Text;
     String Autor;
 
-    public Comment(String Text, String Autor) {
+    public Comentario(String Text, String Autor) {
         this.Text = Text;
         this.Autor = Autor;
     }

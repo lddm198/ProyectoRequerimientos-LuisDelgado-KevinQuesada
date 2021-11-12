@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import reque.User;
+import reque.Utilities;
 
 /**
  *
@@ -403,8 +404,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearCuentaBtnActionPerformed
 
     private void ConfirmarbtnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarbtnCActionPerformed
-        boolean ValidPass = this.controlador.ValidatePassword(this.ContraseñatxfC.getText());
-        boolean ValidEmail = this.controlador.ValidateEmail(this.EmailtxfC.getText().toLowerCase());
+        boolean ValidPass = Utilities.ValidatePassword(this.ContraseñatxfC.getText());
+        boolean ValidEmail = Utilities.ValidateEmail(this.EmailtxfC.getText().toLowerCase());
         if(ValidEmail){
             if(ValidPass){
                 try {

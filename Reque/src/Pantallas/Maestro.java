@@ -6,6 +6,12 @@
 package Pantallas;
 
 import ConexionDB.Controller;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import reque.Publicacion;
 import reque.User;
 
 /**
@@ -19,12 +25,15 @@ public class Maestro extends javax.swing.JFrame {
      */
     User usuario;
     Controller control;
+    Publicacion PubliActual = null;
     public Maestro(User usuario, Controller control) {
         initComponents();
         this.FondoVerPublicacion.setVisible(false);
         this.FondoEdit.setVisible(false);
+        this.FondoCrearP.setVisible(false);
         this.usuario = usuario;
         this.control = control;
+        this.Post(this.usuario.getName(), 1000);
     }
 
     /**
@@ -50,9 +59,10 @@ public class Maestro extends javax.swing.JFrame {
         FondoInicioMaestro = new javax.swing.JPanel();
         InicioAprendiz = new javax.swing.JPanel();
         CuentaBtn = new javax.swing.JButton();
-        GuardadasBtn = new javax.swing.JButton();
+        CrearBtn = new javax.swing.JButton();
         CarrarSesionBtn = new javax.swing.JButton();
         jScrollPaneInicio = new javax.swing.JScrollPane();
+        jPanelInicio = new javax.swing.JPanel();
         FondoEdit = new javax.swing.JPanel();
         ConfirmarEdit = new javax.swing.JButton();
         CancelarEdit = new javax.swing.JButton();
@@ -60,6 +70,13 @@ public class Maestro extends javax.swing.JFrame {
         jTextAreaPubliEdit = new javax.swing.JTextArea();
         jScrollPaneTituloEdit = new javax.swing.JScrollPane();
         jTextAreaTituloEdit = new javax.swing.JTextArea();
+        FondoCrearP = new javax.swing.JPanel();
+        ConfirmarCrearP = new javax.swing.JButton();
+        CancelarCrearP = new javax.swing.JButton();
+        jScrollPanePubliCrearP = new javax.swing.JScrollPane();
+        jTextAreaPubliCrearP = new javax.swing.JTextArea();
+        jScrollPaneTituloCrearP = new javax.swing.JScrollPane();
+        jTextAreaTituloCrearP = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1288, 696));
@@ -132,7 +149,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoVerPublicacionLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 29, Short.MAX_VALUE)
                         .addComponent(EditarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(191, 191, 191)
                         .addComponent(EliminarPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,7 +165,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(FondoVerPublicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoVerPublicacionLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPanePubli, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -170,13 +187,13 @@ public class Maestro extends javax.swing.JFrame {
         CuentaBtn.setText("Editar Cuenta");
         CuentaBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        GuardadasBtn.setBackground(new java.awt.Color(200, 191, 191));
-        GuardadasBtn.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
-        GuardadasBtn.setText("Crear Publicación");
-        GuardadasBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        GuardadasBtn.addActionListener(new java.awt.event.ActionListener() {
+        CrearBtn.setBackground(new java.awt.Color(200, 191, 191));
+        CrearBtn.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
+        CrearBtn.setText("Crear Publicación");
+        CrearBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CrearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardadasBtnActionPerformed(evt);
+                CrearBtnActionPerformed(evt);
             }
         });
 
@@ -184,6 +201,11 @@ public class Maestro extends javax.swing.JFrame {
         CarrarSesionBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CarrarSesionBtn.setText("Cerrar Sesión");
         CarrarSesionBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CarrarSesionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CarrarSesionBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InicioAprendizLayout = new javax.swing.GroupLayout(InicioAprendiz);
         InicioAprendiz.setLayout(InicioAprendizLayout);
@@ -197,7 +219,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(InicioAprendizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CarrarSesionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GuardadasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         InicioAprendizLayout.setVerticalGroup(
@@ -206,7 +228,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addComponent(CuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
-                .addComponent(GuardadasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(CarrarSesionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -214,6 +236,11 @@ public class Maestro extends javax.swing.JFrame {
 
         jScrollPaneInicio.setBackground(new java.awt.Color(25, 37, 77));
         jScrollPaneInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        jPanelInicio.setBackground(new java.awt.Color(25, 37, 77));
+        jPanelInicio.setAutoscrolls(true);
+        jPanelInicio.setLayout(new java.awt.GridLayout(100, 0, 0, 25));
+        jScrollPaneInicio.setViewportView(jPanelInicio);
 
         javax.swing.GroupLayout FondoInicioMaestroLayout = new javax.swing.GroupLayout(FondoInicioMaestro);
         FondoInicioMaestro.setLayout(FondoInicioMaestroLayout);
@@ -223,7 +250,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(InicioAprendiz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPaneInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
+                .addComponent(jScrollPaneInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FondoInicioMaestroLayout.setVerticalGroup(
@@ -234,7 +261,7 @@ public class Maestro extends javax.swing.JFrame {
                     .addComponent(InicioAprendiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(FondoInicioMaestroLayout.createSequentialGroup()
                         .addComponent(jScrollPaneInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 27, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -283,7 +310,7 @@ public class Maestro extends javax.swing.JFrame {
                 .addComponent(ConfirmarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(284, 284, 284)
                 .addComponent(CancelarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoEditLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(FondoEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -295,7 +322,7 @@ public class Maestro extends javax.swing.JFrame {
             FondoEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoEditLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneTituloEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addComponent(jScrollPaneTituloEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPanePubliEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,9 +332,77 @@ public class Maestro extends javax.swing.JFrame {
                 .addGap(46, 46, 46))
         );
 
+        FondoCrearP.setBackground(new java.awt.Color(25, 37, 77));
+        FondoCrearP.setEnabled(false);
+        FondoCrearP.setFocusable(false);
+
+        ConfirmarCrearP.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ConfirmarCrearP.setText("Confirmar");
+        ConfirmarCrearP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ConfirmarCrearP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCrearPActionPerformed(evt);
+            }
+        });
+
+        CancelarCrearP.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        CancelarCrearP.setText("Cancelar");
+        CancelarCrearP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CancelarCrearP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarCrearPActionPerformed(evt);
+            }
+        });
+
+        jTextAreaPubliCrearP.setColumns(20);
+        jTextAreaPubliCrearP.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jTextAreaPubliCrearP.setRows(5);
+        jTextAreaPubliCrearP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jScrollPanePubliCrearP.setViewportView(jTextAreaPubliCrearP);
+
+        jScrollPaneTituloCrearP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        jTextAreaTituloCrearP.setColumns(20);
+        jTextAreaTituloCrearP.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jTextAreaTituloCrearP.setRows(1);
+        jTextAreaTituloCrearP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jScrollPaneTituloCrearP.setViewportView(jTextAreaTituloCrearP);
+
+        javax.swing.GroupLayout FondoCrearPLayout = new javax.swing.GroupLayout(FondoCrearP);
+        FondoCrearP.setLayout(FondoCrearPLayout);
+        FondoCrearPLayout.setHorizontalGroup(
+            FondoCrearPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoCrearPLayout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addComponent(ConfirmarCrearP, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284)
+                .addComponent(CancelarCrearP, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(364, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoCrearPLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(FondoCrearPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPanePubliCrearP)
+                    .addComponent(jScrollPaneTituloCrearP, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE))
+                .addGap(154, 154, 154))
+        );
+        FondoCrearPLayout.setVerticalGroup(
+            FondoCrearPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoCrearPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPaneTituloCrearP, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPanePubliCrearP, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FondoCrearPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConfirmarCrearP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CancelarCrearP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
+        );
+
         LayeredPane.setLayer(FondoVerPublicacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
         LayeredPane.setLayer(FondoInicioMaestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         LayeredPane.setLayer(FondoEdit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPane.setLayer(FondoCrearP, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout LayeredPaneLayout = new javax.swing.GroupLayout(LayeredPane);
         LayeredPane.setLayout(LayeredPaneLayout);
@@ -318,6 +413,8 @@ public class Maestro extends javax.swing.JFrame {
                 .addComponent(FondoInicioMaestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(FondoEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FondoCrearP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LayeredPaneLayout.setVerticalGroup(
             LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,6 +423,8 @@ public class Maestro extends javax.swing.JFrame {
                 .addComponent(FondoInicioMaestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(FondoEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(LayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FondoCrearP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,14 +441,14 @@ public class Maestro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void GuardadasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardadasBtnActionPerformed
+    private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
         this.FondoInicioMaestro.setEnabled(false);
         this.FondoInicioMaestro.setFocusable(false);
         this.FondoInicioMaestro.setVisible(false);
-        this.FondoVerPublicacion.setEnabled(true);
-        this.FondoVerPublicacion.setFocusable(true);
-        this.FondoVerPublicacion.setVisible(true);
-    }//GEN-LAST:event_GuardadasBtnActionPerformed
+        this.FondoCrearP.setEnabled(true);
+        this.FondoCrearP.setFocusable(true);
+        this.FondoCrearP.setVisible(true);
+    }//GEN-LAST:event_CrearBtnActionPerformed
 
     private void PublicacionVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicacionVolverActionPerformed
         this.FondoInicioMaestro.setEnabled(true);
@@ -381,6 +480,13 @@ public class Maestro extends javax.swing.JFrame {
     }//GEN-LAST:event_EditarPublicacionActionPerformed
 
     private void ConfirmarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarEditActionPerformed
+        
+        try {
+            this.control.EditPubli(this.PubliActual.getID(),this.jTextAreaTituloEdit.getText(),this.jTextAreaPubliEdit.getText());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.FondoVerPublicacion.setEnabled(true);
         this.FondoVerPublicacion.setFocusable(true);
         this.FondoVerPublicacion.setVisible(true);
@@ -389,40 +495,132 @@ public class Maestro extends javax.swing.JFrame {
         this.FondoEdit.setVisible(false);
         this.jTextAreaTitulo.setText(this.jTextAreaTituloEdit.getText());
         this.jTextAreaPubli.setText(this.jTextAreaPubliEdit.getText());
+        this.jPanelInicio.removeAll();
+        this.Post(this.usuario.getName(), 1000);
     }//GEN-LAST:event_ConfirmarEditActionPerformed
 
     private void EliminarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPublicacionActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            this.control.DeletePubli(this.PubliActual.getID());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.FondoInicioMaestro.setEnabled(true);
+        this.FondoInicioMaestro.setFocusable(true);
+        this.FondoInicioMaestro.setVisible(true);
+        this.FondoVerPublicacion.setEnabled(false);
+        this.FondoVerPublicacion.setFocusable(false);
+        this.FondoVerPublicacion.setVisible(false);
+        this.jPanelInicio.removeAll();
+        this.Post(this.usuario.getName(), 1000);
     }//GEN-LAST:event_EliminarPublicacionActionPerformed
 
+    private void ConfirmarCrearPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCrearPActionPerformed
+        
+        String[] options = {"Principiante", "Intermedio", "Avanzado"};
+        int seleccion = JOptionPane.showOptionDialog(null, "¿Cuál es la dificultad de esta publicación?", "Nivel", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);            
+        if(seleccion != -1){
+            this.FondoInicioMaestro.setEnabled(true);
+            this.FondoInicioMaestro.setFocusable(true);
+            this.FondoInicioMaestro.setVisible(true);
+            this.FondoCrearP.setEnabled(false);
+            this.FondoCrearP.setFocusable(false);
+            this.FondoCrearP.setVisible(false);
+            try {
+                this.control.InsertPubli(this.usuario.getID(), this.jTextAreaTituloCrearP.getText(), options[seleccion], this.jTextAreaPubliCrearP.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.jTextAreaTituloCrearP.setText("");
+            this.jTextAreaPubliCrearP.setText("");
+            this.jPanelInicio.removeAll();
+            this.Post(this.usuario.getName(), 1000);
+        }
+    }//GEN-LAST:event_ConfirmarCrearPActionPerformed
+
+    private void CancelarCrearPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarCrearPActionPerformed
+        this.FondoInicioMaestro.setEnabled(true);
+        this.FondoInicioMaestro.setFocusable(true);
+        this.FondoInicioMaestro.setVisible(true);
+        this.FondoCrearP.setEnabled(false);
+        this.FondoCrearP.setFocusable(false);
+        this.FondoCrearP.setVisible(false);
+    }//GEN-LAST:event_CancelarCrearPActionPerformed
+
+    private void CarrarSesionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarrarSesionBtnActionPerformed
+        Inicio pantalla = new Inicio(this.control);
+        pantalla.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CarrarSesionBtnActionPerformed
+    
+    private void Post(String Name, int limit){
+        try {
+            ArrayList<Publicacion> list = this.control.SelectPubli(Name, limit);
+            for (int i = 0; i < list.size(); i++) {
+                Publicacion publi = list.get(i);
+                publi.setText("<html><p></p><p>Autor: "+publi.getAutor()+"</p><p>"+publi.getTitulo()+"</p><p>Dificultad: "+publi.getDificultad()+"</p><p></p><p></p></html>");
+                publi.setFont(new java.awt.Font("Century Gothic", 1, 18));
+                publi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+                publi.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                        FondoInicioMaestro.setEnabled(false);
+                        FondoInicioMaestro.setFocusable(false);
+                        FondoInicioMaestro.setVisible(false);
+                        FondoVerPublicacion.setEnabled(true);
+                        FondoVerPublicacion.setFocusable(true);
+                        FondoVerPublicacion.setVisible(true);
+                        jTextAreaPubli.setText(publi.getTexto());
+                        jTextAreaTitulo.setText(publi.getTitulo());
+                        PubliActual = publi;
+                    }
+                });
+                this.jPanelInicio.add(list.get(i));
+            }
+            this.jPanelInicio.revalidate();
+            this.jPanelInicio.repaint();
+        } catch (SQLException ex) {
+            Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelarCrearP;
     private javax.swing.JButton CancelarEdit;
     private javax.swing.JButton CarrarSesionBtn;
+    private javax.swing.JButton ConfirmarCrearP;
     private javax.swing.JButton ConfirmarEdit;
+    private javax.swing.JButton CrearBtn;
     private javax.swing.JButton CuentaBtn;
     private javax.swing.JButton EditarPublicacion;
     private javax.swing.JButton EliminarPublicacion;
+    private javax.swing.JPanel FondoCrearP;
     private javax.swing.JPanel FondoEdit;
     private javax.swing.JPanel FondoInicioMaestro;
     private javax.swing.JPanel FondoVerPublicacion;
-    private javax.swing.JButton GuardadasBtn;
     private javax.swing.JPanel InicioAprendiz;
     private javax.swing.JLayeredPane LayeredPane;
     private javax.swing.JButton PublicacionVolver;
+    private javax.swing.JPanel jPanelInicio;
     private javax.swing.JScrollPane jScrollPaneComent;
     private javax.swing.JScrollPane jScrollPaneInicio;
     private javax.swing.JScrollPane jScrollPanePubli;
+    private javax.swing.JScrollPane jScrollPanePubliCrearP;
     private javax.swing.JScrollPane jScrollPanePubliEdit;
     private javax.swing.JScrollPane jScrollPaneTitulo;
+    private javax.swing.JScrollPane jScrollPaneTituloCrearP;
     private javax.swing.JScrollPane jScrollPaneTituloEdit;
     private javax.swing.JTextArea jTextAreaComent;
     private javax.swing.JTextArea jTextAreaPubli;
+    private javax.swing.JTextArea jTextAreaPubliCrearP;
     private javax.swing.JTextArea jTextAreaPubliEdit;
     private javax.swing.JTextArea jTextAreaTitulo;
+    private javax.swing.JTextArea jTextAreaTituloCrearP;
     private javax.swing.JTextArea jTextAreaTituloEdit;
     // End of variables declaration//GEN-END:variables
 }

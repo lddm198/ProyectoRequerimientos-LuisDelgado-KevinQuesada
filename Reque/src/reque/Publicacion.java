@@ -16,13 +16,25 @@ public class Publicacion extends JButton{
     String Titulo;
     String Autor;
     String Texto;
-    ArrayList<Comment> Comments;
+    String Dificultad;
+    ArrayList<Comentario> Comments;
+    int ID;
 
-    public Publicacion (String Titulo, String Autor, String Texto) {
+    public Publicacion (String Titulo, String Autor, String Texto, int ID, String Dificultad) {
         this.Titulo = Titulo;
         this.Autor = Autor;
         this.Texto = Texto;
-        this.Comments = new ArrayList<Comment>();
+        this.Comments = new ArrayList<Comentario>();
+        this.ID = ID;
+        this.Dificultad = Dificultad;
+    }
+
+    public String getDificultad() {
+        return Dificultad;
+    }
+
+    public int getID() {
+        return ID;
     }
 
 
@@ -38,13 +50,15 @@ public class Publicacion extends JButton{
         return Texto;
     }
 
-    public ArrayList<Comment> getComments() {
+    public ArrayList<Comentario> getComments() {
         return Comments;
     }
     
-    public void AddComment(Comment c){
+    public void AddComment(Comentario c){
         this.Comments.add(c);
     }
+    
+   
     
     
 }

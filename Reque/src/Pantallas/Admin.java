@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 import reque.Mailer;
 import reque.User;
+import reque.Utilities;
 
 /**
  *
@@ -58,6 +59,7 @@ public class Admin extends javax.swing.JFrame {
         RegistrarMaestroBtn = new javax.swing.JButton();
         RegistrarAdminBtn = new javax.swing.JButton();
         EliminarCuentaBtn = new javax.swing.JButton();
+        CerrarSesiónBtn = new javax.swing.JButton();
         MaestroNametf = new javax.swing.JTextField();
         BuscarMaestroBtn = new javax.swing.JButton();
         jScrollPaneInicio = new javax.swing.JScrollPane();
@@ -217,35 +219,53 @@ public class Admin extends javax.swing.JFrame {
         EliminarCuentaBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         EliminarCuentaBtn.setText("Eliminar Cuenta");
         EliminarCuentaBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        EliminarCuentaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCuentaBtnActionPerformed(evt);
+            }
+        });
+
+        CerrarSesiónBtn.setBackground(new java.awt.Color(200, 191, 191));
+        CerrarSesiónBtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        CerrarSesiónBtn.setText("Cerrar Sesión");
+        CerrarSesiónBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        CerrarSesiónBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesiónBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InicioAdminLayout = new javax.swing.GroupLayout(InicioAdmin);
         InicioAdmin.setLayout(InicioAdminLayout);
         InicioAdminLayout.setHorizontalGroup(
             InicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InicioAdminLayout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(EditCuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
             .addGroup(InicioAdminLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(InicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CerrarSesiónBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EliminarCuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RegistrarAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RegistrarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InicioAdminLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(EditCuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         InicioAdminLayout.setVerticalGroup(
             InicioAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InicioAdminLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(52, 52, 52)
                 .addComponent(EditCuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(39, 39, 39)
                 .addComponent(RegistrarMaestroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(61, 61, 61)
                 .addComponent(RegistrarAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addComponent(EliminarCuentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(65, 65, 65)
+                .addComponent(CerrarSesiónBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MaestroNametf.setBackground(new java.awt.Color(200, 191, 191));
@@ -574,13 +594,14 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_MaestroFideMouseClicked
 
     private void ConfirmarRegistroAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarRegistroAdminActionPerformed
-        boolean ValidEmail = this.control.ValidateEmail(this.AdminEmail.getText().toLowerCase());
+        boolean ValidEmail = Utilities.ValidateEmail(this.AdminEmail.getText().toLowerCase());
+        String contra = Utilities.generarContrasenaSegura();
         if(ValidEmail){
             try {
-                if(this.control.InsertUser(this.AdminName.getText(), 1, "12345", this.AdminEmail.getText().toLowerCase())){
+                if(this.control.InsertUser(this.AdminName.getText(), 1, contra, this.AdminEmail.getText().toLowerCase())){
                     JOptionPane.showMessageDialog(this.FondoRegistroAdmin,"Usuario creado de forma correcta");
                     try {
-                        this.mails.send(this.AdminEmail.getText().toLowerCase(), "12345");
+                        this.mails.send(this.AdminEmail.getText().toLowerCase(), contra);
                     } catch (MessagingException ex) {
                         Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -596,6 +617,16 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ConfirmarRegistroAdminActionPerformed
 
+    private void EliminarCuentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCuentaBtnActionPerformed
+        
+    }//GEN-LAST:event_EliminarCuentaBtnActionPerformed
+
+    private void CerrarSesiónBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesiónBtnActionPerformed
+        Inicio pantalla = new Inicio(this.control);
+        pantalla.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CerrarSesiónBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -606,6 +637,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton BuscarMaestroBtn;
     private javax.swing.JButton CancelarRegistroAdmin;
     private javax.swing.JButton CancelarRegistroMaestro;
+    private javax.swing.JButton CerrarSesiónBtn;
     private javax.swing.JButton ConfirmarRegistroAdmin;
     private javax.swing.JButton ConfirmarRegistroMaestro;
     private javax.swing.JButton EditCuentaBtn;

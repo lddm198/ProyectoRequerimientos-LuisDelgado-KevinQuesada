@@ -463,35 +463,9 @@ public class Aprendiz extends javax.swing.JFrame {
     }//GEN-LAST:event_GuardarPublicacionActionPerformed
 
     private void CarrarSesionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarrarSesionBtnActionPerformed
-        String a = "Magnus";
-        Publicacion b;
-        b = new Publicacion("Titulo Prueba","Magnus","Holaaaa, Como andan?");
-        b.setText("<html><p></p><p>Autor: "+b.getAutor()+"</p><p>"+b.getTitulo()+"</p><p></p><p></p></html>");
-        b.setFont(new java.awt.Font("Century Gothic", 1, 18));
-        b.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        b.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-                FondoInicioAprendiz.setEnabled(false);
-                FondoInicioAprendiz.setFocusable(false);
-                FondoInicioAprendiz.setVisible(false);
-                FondoVerPublicacion.setEnabled(true);
-                FondoVerPublicacion.setFocusable(true);
-                FondoVerPublicacion.setVisible(true);
-                jTextAreaPubli.setText(b.getTexto());
-                jTextAreaTitulo.setText(b.getTitulo());
-                
-            }
-        });
-//        JTextArea jTextAreaNuevaPubli;
-//        jTextAreaNuevaPubli = new javax.swing.JTextArea();
-//        jTextAreaNuevaPubli.setEditable(false);
-//        jTextAreaNuevaPubli.setColumns(10);
-//        jTextAreaNuevaPubli.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-//        jTextAreaNuevaPubli.setRows(5);
-//        jTextAreaNuevaPubli.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-//        jTextAreaNuevaPubli.setFocusable(false);
-//        jTextAreaNuevaPubli.setText("aaaa");
-        a(this.jPanelInicio,b);
+        Inicio pantalla = new Inicio(this.control);
+        pantalla.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CarrarSesionBtnActionPerformed
 
     private void a(JPanel p, JButton b){

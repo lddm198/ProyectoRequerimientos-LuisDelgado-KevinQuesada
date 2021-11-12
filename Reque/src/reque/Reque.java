@@ -39,6 +39,9 @@ public class Reque {
 //        } catch (MessagingException ex) {
 //            Logger.getLogger(Reque.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+//        Connection con = Conexion.connect();
+//        Controller control = new Controller(con);
+//        control.InsertPubli(2, "Prueba2", "Principiante", "Hola?");
     }
     
 }

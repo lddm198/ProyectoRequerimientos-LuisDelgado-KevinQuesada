@@ -13,11 +13,17 @@ public class User {
     int tipo;
     String Name;
     String Email;
+    int ID;
 
-    public User(int tipo, String Name, String Email) {
+    public User(int tipo, String Name, String Email, int ID) {
         this.tipo = tipo;
         this.Name = Name;
         this.Email = Email;
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public int getTipo() {
