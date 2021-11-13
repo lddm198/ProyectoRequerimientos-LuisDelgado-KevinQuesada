@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import reque.Comentario;
 import reque.Publicacion;
 import reque.User;
 
@@ -555,6 +556,15 @@ public class Maestro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CarrarSesionBtnActionPerformed
     
+    
+    private void PostComent(ArrayList<Comentario> list){
+        String Comment = "";
+        for (int i = 0; i < list.size(); i++) {
+            Comment = Comment.concat(list.get(i).getAutor()+": "+list.get(i).getText()+"\n");
+        }
+        this.jTextAreaComent.setText(Comment);
+    }
+    
     private void Post(String Name, int limit){
         try {
             ArrayList<Publicacion> list = this.control.SelectPubli(Name, limit);
@@ -574,6 +584,11 @@ public class Maestro extends javax.swing.JFrame {
                         jTextAreaPubli.setText(publi.getTexto());
                         jTextAreaTitulo.setText(publi.getTitulo());
                         PubliActual = publi;
+                        try {
+                            PostComent(control.SelectComment(publi.getID()));
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 });
                 this.jPanelInicio.add(list.get(i));

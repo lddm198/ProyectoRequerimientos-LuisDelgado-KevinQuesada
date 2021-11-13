@@ -6,9 +6,12 @@
 package Pantallas;
 
 import ConexionDB.Controller;
-import javax.swing.JButton;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import reque.Comentario;
 import reque.Publicacion;
 import reque.User;
 
@@ -23,6 +26,7 @@ public class Aprendiz extends javax.swing.JFrame {
      */
     User usuario;
     Controller control;
+    Publicacion PubliActual = null;
     public Aprendiz(User usuario, Controller control) {
         initComponents();
         this.FondoVerPublicacion.setVisible(false);
@@ -266,6 +270,11 @@ public class Aprendiz extends javax.swing.JFrame {
         BuscarMaestroBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         BuscarMaestroBtn.setText("Go");
         BuscarMaestroBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        BuscarMaestroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarMaestroBtnActionPerformed(evt);
+            }
+        });
 
         PaginaInicioBtn.setBackground(new java.awt.Color(200, 191, 191));
         PaginaInicioBtn.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -410,12 +419,14 @@ public class Aprendiz extends javax.swing.JFrame {
     }//GEN-LAST:event_MaestroNametfMouseClicked
 
     private void GuardadasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardadasBtnActionPerformed
-        this.FondoInicioAprendiz.setEnabled(false);
-        this.FondoInicioAprendiz.setFocusable(false);
-        this.FondoInicioAprendiz.setVisible(false);
-        this.FondoVerPublicacion.setEnabled(true);
-        this.FondoVerPublicacion.setFocusable(true);
-        this.FondoVerPublicacion.setVisible(true);
+        this.jPanelInicio.removeAll();
+        ArrayList<Publicacion> list;
+        try {
+            list = this.control.SelectPubliGuardada(this.usuario.getName(), 15);
+            this.Post(list);
+        } catch (SQLException ex) {
+            Logger.getLogger(Aprendiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_GuardadasBtnActionPerformed
 
     private void SeguirMaestroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirMaestroBtnActionPerformed
@@ -443,9 +454,14 @@ public class Aprendiz extends javax.swing.JFrame {
 
     private void ComentarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComentarPublicacionActionPerformed
         if(!this.jTextAreaComentar.getText().equals("")){
-           String Comment = this.jTextAreaComent.getText().concat("User: "+this.jTextAreaComentar.getText()+"\n");
-            this.jTextAreaComent.setText(Comment);
-            this.jTextAreaComentar.setText(""); 
+            try {
+                this.control.InsertComentario(this.PubliActual.getID(), this.usuario.getID(), this.jTextAreaComentar.getText());
+                String Comment = this.jTextAreaComent.getText().concat(this.usuario.getName()+": "+this.jTextAreaComentar.getText()+"\n");
+                this.jTextAreaComent.setText(Comment);
+                this.jTextAreaComentar.setText(""); 
+            } catch (SQLException ex) {
+                Logger.getLogger(Aprendiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_ComentarPublicacionActionPerformed
 
@@ -459,7 +475,13 @@ public class Aprendiz extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfirmarComentActionPerformed
 
     private void GuardarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarPublicacionActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.control.InsertGuardada(this.PubliActual.getID(), this.usuario.getID());
+            JOptionPane.showMessageDialog(this.FondoVerPublicacion,"Guardado con exito!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Aprendiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_GuardarPublicacionActionPerformed
 
     private void CarrarSesionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarrarSesionBtnActionPerformed
@@ -468,11 +490,17 @@ public class Aprendiz extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CarrarSesionBtnActionPerformed
 
-    private void a(JPanel p, JButton b){
-        p.add(b);
-        p.revalidate();
-        p.repaint();
-    }
+    private void BuscarMaestroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarMaestroBtnActionPerformed
+        this.jPanelInicio.removeAll();
+        ArrayList<Publicacion> list;
+        try {
+            list = this.control.SelectPubli(this.MaestroNametf.getText(), 15);
+            this.Post(list);
+        } catch (SQLException ex) {
+            Logger.getLogger(Aprendiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BuscarMaestroBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -507,4 +535,44 @@ public class Aprendiz extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaPubli;
     private javax.swing.JTextArea jTextAreaTitulo;
     // End of variables declaration//GEN-END:variables
+
+    private void PostComent(ArrayList<Comentario> list){
+        String Comment = "";
+        for (int i = 0; i < list.size(); i++) {
+            Comment = Comment.concat(list.get(i).getAutor()+": "+list.get(i).getText()+"\n");
+        }
+        this.jTextAreaComent.setText(Comment);
+        this.jTextAreaComentar.setText(""); 
+    }
+    
+    private void Post(ArrayList<Publicacion> list){
+        for (int i = 0; i < list.size(); i++) {
+            Publicacion publi = list.get(i);
+            publi.setText("<html><p></p><p>Autor: "+publi.getAutor()+"</p><p>"+publi.getTitulo()+"</p><p>Dificultad: "+publi.getDificultad()+"</p><p></p><p></p></html>");
+            publi.setFont(new java.awt.Font("Century Gothic", 1, 18));
+            publi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+            publi.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    FondoInicioAprendiz.setEnabled(false);
+                    FondoInicioAprendiz.setFocusable(false);
+                    FondoInicioAprendiz.setVisible(false);
+                    FondoVerPublicacion.setEnabled(true);
+                    FondoVerPublicacion.setFocusable(true);
+                    FondoVerPublicacion.setVisible(true);
+                    jTextAreaPubli.setText(publi.getTexto());
+                    jTextAreaTitulo.setText(publi.getTitulo());
+                    PubliActual = publi;
+                    try {
+                        PostComent(control.SelectComment(publi.getID()));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Aprendiz.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            this.jPanelInicio.add(list.get(i));
+        }
+        this.jPanelInicio.revalidate();
+        this.jPanelInicio.repaint();
+        
+    }
 }
