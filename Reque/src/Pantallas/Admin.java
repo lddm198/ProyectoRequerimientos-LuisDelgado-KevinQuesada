@@ -411,6 +411,11 @@ public class Admin extends javax.swing.JFrame {
         ConfirmarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         ConfirmarRegistroMaestro.setText("Confirmar");
         ConfirmarRegistroMaestro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ConfirmarRegistroMaestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarRegistroMaestroActionPerformed(evt);
+            }
+        });
 
         CancelarRegistroMaestro.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         CancelarRegistroMaestro.setText("Cancelar");
@@ -626,6 +631,36 @@ public class Admin extends javax.swing.JFrame {
         pantalla.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CerrarSesiónBtnActionPerformed
+
+    private void ConfirmarRegistroMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarRegistroMaestroActionPerformed
+        boolean ValidEmail = Utilities.ValidateEmail(this.MaestroEmail.getText().toLowerCase());
+        try {
+            boolean ValidCode = this.control.SelectUserMaestro(this.MaestroFide.getText());
+        } catch (SQLException ex) {
+//            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this.FondoRegistroMaestro,"Este usuario no esta registrado en la FCACR");
+        }
+        String contra = Utilities.generarContrasenaSegura();
+        if(ValidEmail){
+            try {
+                if(this.control.InsertUserMaestro(this.MaestroName.getText(), 2, contra, this.MaestroEmail.getText().toLowerCase(),this.MaestroFide.getText())){
+                    JOptionPane.showMessageDialog(this.FondoRegistroMaestro,"Usuario creado de forma correcta");
+                    try {
+                        this.mails.send(this.MaestroEmail.getText().toLowerCase(), contra);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            } catch (SQLException ex) {
+//                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this.FondoRegistroMaestro,"Este usuario ya existe");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this.FondoRegistroMaestro,"Email invalido");
+        }
+    }//GEN-LAST:event_ConfirmarRegistroMaestroActionPerformed
 
     /**
      * @param args the command line arguments

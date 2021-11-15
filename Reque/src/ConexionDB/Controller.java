@@ -34,6 +34,14 @@ public class Controller {
         return true;
     }
     
+    public boolean InsertUserMaestro(String Name, int Tipo,String Contra,String Email,String Codigo) throws SQLException{
+        String querystr = "insert into Usuario (IdTipoUsuario, Usuario, Contra, Email, Codigo) values("+Tipo+",'"+Name+"',CONVERT(varbinary(255), '"+Contra+"'),'"+Email+"',"+Codigo+")";
+        Statement query = con.createStatement();
+        query.execute(querystr);
+        
+        return true;
+    }
+    
     public boolean InsertGuardada(int IdP, int IdUser) throws SQLException{
         String querystr = "insert into PublicacionGuardada (IdPublicacion, IdUsuario) values("+IdP+","+IdUser+")";
         Statement query = con.createStatement();
@@ -94,6 +102,21 @@ public class Controller {
             return user;
         }
     } 
+    
+    public boolean SelectUserMaestro (String Codigo) throws SQLException{
+        PreparedStatement s = con.prepareStatement("select Codigo from BaseFederacion where Codigo="+Codigo);
+        ResultSet rs = s.executeQuery();
+        int ID = -1;
+        while (rs.next()) {
+            ID = rs.getInt (1);
+        }
+        if(ID == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     
     public ArrayList<Publicacion> SelectPubli (String Name, int limit) throws SQLException{
         PreparedStatement s = con.prepareStatement("SELECT TOP "+limit+" id,Titulo,Dificultad,Texto,Usuario,Date,Enabled from Publicaciones where Usuario = '"+Name+"' and Enabled = 1 order by Date desc");
